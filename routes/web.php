@@ -7,10 +7,12 @@ use App\Http\Controllers\productController;
 use App\Http\Controllers\departmentController;
 use App\Http\Controllers\TempController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CartController;
 use App\Models\Department;
 use App\Models\Product;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\ImageUploadController;
+use App\Models\Cart;
 use Laravel\Socialite\Facades\Socialite;
 
 /*
@@ -56,8 +58,17 @@ Route::get('order-temp-minus/{id}', [TempController::class, 'minus'])->name('ord
 Route::get('order-temp-delete/{id}', [TempController::class, 'delete'])->name('ordertemp-delete');
 Route::get('order-temp-delete-all', [TempController::class, 'delete_all'])->name('ordertemp-delete-all');
 //order confirm
-Route::get('order-confirm', [OrderController::class, 'OrderConfirm'])->name('OrderConfirm');
-
+Route::get('order-confirm', [OrderController::class, 'ConfirmOrder'])->name('OrderConfirm');
+Route::get('order-index', [OrderController::class ,'index'])->name('order.index');
+Route::get('order-items/{id}', [OrderController::class ,'OrderItems'])->name('order.items');
+//Github Auth
 Route::get('/auth/redirect', [UserController::class, 'redirectToGithub'])->name('github.redirect');
 Route::get('/auth/callback', [UserController::class, 'Githubcallback'])->name('github.callback');
-
+//cart
+Route::get('addToCart/{id}', [CartController::class ,'store' ])->name('cart.store');
+Route::get('index', [CartController::class ,'index' ])->name('cart.index');
+Route::get('plus/{id}', [CartController::class ,'plus' ])->name('cart.plus');
+Route::get('minus/{id}', [CartController::class ,'minus' ])->name('cart.minus');
+Route::get('delete-Item/{id}', [CartController::class ,'deleteItem' ])->name('cart.deleteItem');
+Route::get('cart-empty', [CartController::class ,'destroy' ])->name('cart.destroy');
+//Order

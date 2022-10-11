@@ -5,16 +5,41 @@ use App\Models\Temp;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Cart;
+use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
-    public function OrderConfirm(){
-    $user_id= Auth::user()->id;
-    $orders = Temp::where('user_id', '=', $user_id)->get();
 
-    Order::create([
-        'status'=> 'pending',
-        'user_id' => $user_id,
+    public function index()
+    {
+        $orders = Auth::user()->orders;
+        return view('MyOrders',compact('orders'));
+    }
+
+    public function ConfirmOrder(){
+    $cart = Auth::user()->Cart;
+    $order = Order::create([
+        'status'  =>   'pending',
+        'user_id' =>   Auth::user()->id ,
+        'total'   =>   $cart->total,
     ]);
+    foreach($cart->cartItems as $item){
+        OrderItem::create([
+            'product_id' =>$item->product_id,
+            'order_id'   =>$order->id,
+            'total'      =>$item->total,
+            'quantity'   =>$item->quantity
+        ]);
+        $item->delete();
+        $cart->update([
+            'total' => 0,
+        ]);
+    }
+    }
+
+    public function OrderItems($id){
+        $order = order::find($id);
+        return view('orderDetails',compact('order'));
     }
 }

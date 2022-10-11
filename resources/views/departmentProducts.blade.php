@@ -29,7 +29,7 @@
                             <i class="fa fa-star"></i>
                         </div>
                         <div class="product-btns">
-                            <p class="btn-holder"><a href="{{  route('add.to.cart',$prod->id) }}" class="btn btn-danger btn-block text-center" role="button">Add to cart</a> </p>
+                            <p class="btn-holder"><a href="{{  route('cart.store',$prod->id) }}" class="btn btn-danger btn-block text-center" role="button">Add to cart</a> </p>
                         </div>
                     </div>
                  </div>

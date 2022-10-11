@@ -72,7 +72,7 @@
                                             <i class="fa fa-star"></i>
                                         </div>
                                         <div class="product-btns">
-                                            <form action="{{  route('add.to.cart',$prod->id) }}">
+                                            <form action="{{  route('cart.store',$prod->id) }}">
                                                 <button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                             </form>
                                         </div>

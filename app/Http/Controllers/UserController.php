@@ -113,7 +113,7 @@ $user->update(
 //delete profile
 public function destroy($id)
 {
-    $user = auth()->user();
+    $user = User::find($id);
     // check if the user has image
     if ($user->image !== null) {
         //to delete the user image from user folder

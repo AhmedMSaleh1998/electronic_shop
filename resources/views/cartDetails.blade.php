@@ -1,6 +1,7 @@
 @extends('layout.layout')
 @section('content')
 <!-- checkout page -->
+@if($cart->cartItems->count() > 0 )
 <div class="privacy py-sm-5 py-4">
     <div class="container py-xl-4 py-lg-2">
         <!-- tittle heading -->
@@ -23,29 +24,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $prods )
+                        @foreach ($cart->cartItems as $prods )
                         <tr class="rem1">
                             <td class="invert">{{ $prods->product_id }}</td>
                             <td class="invert-image">
                                 <a href="single.html">
-                                    <img src="images/products/{{ $prods->image }}" alt="{{ $prods->name }}image" style="width:65px; height:65px" class="img-responsive">
+                                    <img src="images/products/{{ $prods->product->image }}" alt="{{ $prods->product->name }}image" style="width:65px; height:65px" class="img-responsive">
                                 </a>
                             </td>
                             <td class="invert">
                                 <div class="quantity">
                                     <div class="quantity-select">
-                                        <a class="btn btn-success btn-md" style="margin-left:55px" href="{{  route('ordertemp-plus',$prods->product_id) }}" />+</a>
+                                        <a class="btn btn-success btn-md" style="margin-left:55px" href="{{  route('cart.plus',$prods->product_id) }}" />+</a>
                                             <span style="margin:10px">{{ $prods->quantity }}</span>
-                                        <a class="btn btn-success btn-md" href="{{  route('ordertemp-minus',$prods->product_id) }}"/>-</a>
+                                        <a class="btn btn-success btn-md" href="{{  route('cart.minus',$prods->product_id) }}"/>-</a>
                                     </div>
                                 </div>
                             </td>
-                            <td class="invert" >{{ $prods->name }}</td>
-                            <td class="invert">{{ $prods->price }}</td>
-                            <td class="invert">{{ $prods->total }}</td>
+                            <td class="invert" >{{ $prods->product->name }}</td>
+                            <td class="invert">{{ $prods->product->price }}</td>
+                            <td class="invert">{{ ($prods->product->price)*($prods->quantity) }}</td>
                             <td class="invert">
                                 <div class="rem">
-                                    <a class="btn btn-danger" href="{{  route('ordertemp-delete',$prods->product_id) }}"/><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a class="btn btn-danger" href="{{  route('cart.deleteItem',$prods->product_id) }}"/><span class="glyphicon glyphicon-trash"></span></a>
                                 </div>
                             </td>
                         </tr>
@@ -54,10 +55,10 @@
                     <tfoot>
                         <td colspan="5" class="bg-success" style="padding-left:300px">Total</td>
                         <td>
-                            {{ $total }}
+                            {{ $cart->total }}
                         </td>
                         <td>
-                            <a href="{{ route('ordertemp-delete-all') }}" class="btn btn-danger">Empty Cart</a>
+                            <a href="{{ route('cart.destroy') }}" class="btn btn-danger">Empty Cart</a>
                         </td>
                     </tfoot>
                 </table>
@@ -70,5 +71,10 @@
         </div>
     </div>
 </div>
+@else
+<div class="alert alert-danger text-center" style="height:100px">
+Cart Is Empty
+</div>
+@endif
 <!-- //checkout page -->
 @endsection

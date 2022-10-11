@@ -100,7 +100,7 @@
 								<!-- Cart -->
                                 <div class="dropdown">
                                     @auth
-									<a href="{{ route('ordertemp',Auth::user()->id) }}" aria-expanded="true">
+									<a href="{{ route('order.index')}}" aria-expanded="true">
 										<i class="fas fa-shopping-bag"></i>
 										<span>Your Orders</span>
 									</a>
@@ -108,7 +108,7 @@
 								</div>
 								<div class="dropdown">
                                     @auth
-									<a href="{{ route('ordertemp',Auth::user()->id) }}" aria-expanded="true">
+									<a href="{{ route('cart.index')}}" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
 									</a>
