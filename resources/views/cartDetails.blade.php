@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('content')
 <!-- checkout page -->
-@if($cart->cartItems->count() > 0 )
+@if($cart && $cart->cartItems->count() > 0 )
 <div class="privacy py-sm-5 py-4">
     <div class="container py-xl-4 py-lg-2">
         <!-- tittle heading -->

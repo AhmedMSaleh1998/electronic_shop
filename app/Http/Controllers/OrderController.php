@@ -36,7 +36,9 @@ class OrderController extends Controller
             'total' => 0,
         ]);
     }
-    }
+    return view('orderDetails',compact('order'));
+
+}
 
     public function OrderItems($id){
         $order = order::find($id);

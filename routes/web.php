@@ -51,12 +51,6 @@ Route::post('image-upload', [ UserController::class, 'imageUploadPost' ])->name(
 Route::get('/show/{id}', [DepartmentController::class, 'index'])->name('departmentProducts');
 //add to cart
 Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
-//order Temp
-Route::get('order-temp', [TempController::class, 'index'])->name('ordertemp');
-Route::get('order-temp-plus/{id}', [TempController::class, 'plus'])->name('ordertemp-plus');
-Route::get('order-temp-minus/{id}', [TempController::class, 'minus'])->name('ordertemp-minus');
-Route::get('order-temp-delete/{id}', [TempController::class, 'delete'])->name('ordertemp-delete');
-Route::get('order-temp-delete-all', [TempController::class, 'delete_all'])->name('ordertemp-delete-all');
 //order confirm
 Route::get('order-confirm', [OrderController::class, 'ConfirmOrder'])->name('OrderConfirm');
 Route::get('order-index', [OrderController::class ,'index'])->name('order.index');
@@ -71,4 +65,3 @@ Route::get('plus/{id}', [CartController::class ,'plus' ])->name('cart.plus');
 Route::get('minus/{id}', [CartController::class ,'minus' ])->name('cart.minus');
 Route::get('delete-Item/{id}', [CartController::class ,'deleteItem' ])->name('cart.deleteItem');
 Route::get('cart-empty', [CartController::class ,'destroy' ])->name('cart.destroy');
-//Order

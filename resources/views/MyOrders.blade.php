@@ -23,7 +23,7 @@
                     <tbody class="text-center">
                         @foreach ($orders as $order )
                         <tr class="rem1">
-                            <td class="bg-primary"><a href="{{ route('order.items',$order->id) }}">{{ $order->id }}</a></td>
+                            <td class="btn btn-success"><a href="{{ route('order.items',$order->id) }}">{{ $order->id }}</a></td>
                             <td>{{ $order->orderItems->count()}}</td>
                             <td class="">{{ ($order->total) }}</td>
                             <td>{{ $order->created_at }}</td>
