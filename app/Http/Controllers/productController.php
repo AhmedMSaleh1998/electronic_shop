@@ -84,30 +84,4 @@ class productController extends Controller
     {
         //
     }
-    public function addToCart($id)
-    {
-        $user_id= Auth::user()->id;
-        $product = product::find($id);
-        $ordertemps = Temp::where('user_id', '=', $user_id)->get();
-        $priceAfterDiscount = ($product->price)-($product->price * $product->discount);
-            if ($ordertemps->contains('product_id', $id)) {
-                $ordertemp = Temp::where('product_id', '=', $id)->first();
-                $ordertemp->update([
-                    'quantity' => $ordertemp->quantity + 1,
-                    'price' => $priceAfterDiscount ,
-                    'total' => ($priceAfterDiscount) * ($ordertemp->quantity + 1)
-                ]);
-            } else {
-                Temp::create([
-                    'product_id' => $id,
-                    'name' => $product->name,
-                    'image' => $product->image,
-                    'quantity' => 1,
-                    'price' => $priceAfterDiscount,
-                    'total' => $priceAfterDiscount,
-                    'user_id' => $user_id
-                ]);
-            }
-        return back()->with('message', '' . $product->name . ' has been added to card successfully');
-    }
 }
